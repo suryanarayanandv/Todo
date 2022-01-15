@@ -7,12 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
+import javax.swing.SpringLayout;
 import javax.swing.border.Border;
 
 import java.awt.*;
 
-public class Mainpane {
+public class Mainpane implements ActionListener{
     JPanel outer, todo, doing, done, out_todo, out_doing, out_done, in_todo, in_doing, in_done, in_todo_title, in_doing_title, in_done_title;
     JButton add_todo, add_doing, add_done;
     JLabel title_todo, title_doing, title_done;
@@ -22,9 +22,6 @@ public class Mainpane {
          * Proper Layout and Look
          */
 
-        // For Listener
-        MyActionListener myActionListener = new MyActionListener();
-
         Border blackline = BorderFactory.createLineBorder(Color.black);
         title_todo = new JLabel("TODO");
         title_done = new JLabel("DONE");
@@ -32,13 +29,13 @@ public class Mainpane {
 
         add_todo = new JButton("+");
         add_todo.putClientProperty("id", Integer.valueOf(0));
-        add_todo.addActionListener(myActionListener);
+        add_todo.addActionListener(this);
         add_doing = new JButton("+");
         add_doing.putClientProperty("id", Integer.valueOf(1));
-        add_doing.addActionListener(myActionListener);
+        add_doing.addActionListener(this);
         add_done = new JButton("+");
         add_done.putClientProperty("id", Integer.valueOf(2));
-        add_done.addActionListener(myActionListener);
+        add_done.addActionListener(this);
 
         outer = new JPanel();
         outer.setBorder(blackline);
@@ -88,16 +85,19 @@ public class Mainpane {
         in_done_title.add(add_done);
         
         todo = new JPanel();
-        todo.setLayout(null);
+        todo.setLayout(new SpringLayout());
         todo.setBounds(40, 60, 210, 350);
+        todo.setAlignmentY(Component.TOP_ALIGNMENT);
         // todo.setBackground(Color.black);
         doing = new JPanel();
-        doing.setLayout(null);
+        doing.setLayout(new SpringLayout());
         doing.setBounds(290, 60, 210, 350);
+        doing.setAlignmentY(Component.TOP_ALIGNMENT);
         // doing.setBackground(Color.black);
         done = new JPanel();
-        done.setLayout(null);
+        done.setLayout(new SpringLayout());
         done.setBounds(540, 60, 210, 350);
+        done.setAlignmentY(Component.TOP_ALIGNMENT);
         // done.setBackground(Color.black);
         
         in_todo.add(in_todo_title, BorderLayout.NORTH);
@@ -119,18 +119,18 @@ public class Mainpane {
         outer.add(out_done);
         
         frame.add(outer, BorderLayout.CENTER);
-        
     }
-}
 
-
-class MyActionListener implements ActionListener {
-    int id;
+    @Override
     public void actionPerformed(ActionEvent e) {
         JButton b = (JButton) e.getSource();
-        id = (int) b.getClientProperty("id");
-        System.out.println(id);
+        int id = (int) b.getClientProperty("id");
+        if (id == 0) {
+            new dialoguePane(todo);
+        } else if (id == 1) {
+            new dialoguePane(doing);
+        } else if (id == 2) {
+            new dialoguePane(done);
+        }
     }
-
-    
 }

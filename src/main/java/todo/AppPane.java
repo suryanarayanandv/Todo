@@ -21,7 +21,7 @@ public final class AppPane implements MouseMotionListener {
         new Mainpane(mainFrame);
         // new dialoguePane();
         mainFrame.setSize(800, 500);
-        mainFrame.setResizable(false);
+        mainFrame.setResizable(true);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -41,9 +41,7 @@ public final class AppPane implements MouseMotionListener {
                 | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
-        AppPane todo = new AppPane();
-
+        new AppPane();
     }
 
     @Override

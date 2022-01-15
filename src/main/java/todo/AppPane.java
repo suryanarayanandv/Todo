@@ -8,17 +8,20 @@ import javax.swing.event.*;
 /**
  * Hello world!
  */
-public final class App implements MouseMotionListener {
+public final class AppPane implements MouseMotionListener {
 
     // Panels and frame
     JFrame mainFrame = new JFrame();
     int mouseX = 0, mouseY = 0;
-    private App() {
+    private AppPane() {
         mainFrame.setLayout(new BorderLayout());
+        ImageIcon icon = new ImageIcon("src/main/resources/icon.png");
+        mainFrame.setIconImage(icon.getImage());
         new Menubar(mainFrame);
         new Mainpane(mainFrame);
+        // new dialoguePane();
         mainFrame.setSize(800, 500);
-        mainFrame.setResizable(true);
+        mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -33,13 +36,13 @@ public final class App implements MouseMotionListener {
      */
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
                 | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
 
-        App todo = new App();
+        AppPane todo = new AppPane();
 
     }
 
@@ -51,8 +54,6 @@ public final class App implements MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
-        System.out.println(mouseX + " " + mouseY);
+
     }
 }

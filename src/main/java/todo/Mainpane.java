@@ -3,20 +3,22 @@ package todo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SpringLayout;
 import javax.swing.border.Border;
 
 import java.awt.*;
 
 public class Mainpane implements ActionListener{
-    JPanel outer, todo, doing, done, out_todo, out_doing, out_done, in_todo, in_doing, in_done, in_todo_title, in_doing_title, in_done_title;
+    JPanel outer, doing, out_todo, out_doing, out_done, in_todo, in_doing, in_done, in_todo_title, in_doing_title, in_done_title, todo, done;
     JButton add_todo, add_doing, add_done;
     JLabel title_todo, title_doing, title_done;
+    GridBagConstraints gbc;
     public Mainpane(JFrame frame) {
+        gbc = new GridBagConstraints();
 
         /**
          * Proper Layout and Look
@@ -40,18 +42,16 @@ public class Mainpane implements ActionListener{
         outer = new JPanel();
         outer.setBorder(blackline);
         outer.setLayout(null);
-
+        
         out_todo = new JPanel();
         out_todo.setBorder(blackline);
+        // out_todo.setBackground(Color.CYAN);
         out_doing = new JPanel();
         out_doing.setBorder(blackline);
+        // out_doing.setBackground(Color.CYAN);
         out_done = new JPanel();
         out_done.setBorder(blackline);
-
-        // set panel layouts to null
-        out_todo.setLayout(new BorderLayout());
-        out_doing.setLayout(new BorderLayout());
-        out_done.setLayout(new BorderLayout());
+        // out_done.setBackground(Color.CYAN);
 
         // set panel bounds
         out_todo.setBounds(40, 40, 210, 350);
@@ -60,18 +60,26 @@ public class Mainpane implements ActionListener{
 
         in_todo = new JPanel();
         in_todo.setBorder(blackline);
+        in_todo.setLayout(new BorderLayout());
         in_doing = new JPanel();
         in_doing.setBorder(blackline);
+        in_doing.setLayout(new BorderLayout());
         in_done = new JPanel();
         in_done.setBorder(blackline);
-        
-        in_doing.setLayout(new BorderLayout());
-        in_todo.setLayout(new BorderLayout());
         in_done.setLayout(new BorderLayout());
 
+
+        // set panel layouts to null
+        out_todo.setLayout(new BorderLayout());
+        out_doing.setLayout(new BorderLayout());
+        out_done.setLayout(new BorderLayout());
+
         in_todo_title = new JPanel();
+        in_todo_title.setLayout(new BorderLayout());
         in_doing_title = new JPanel();
+        in_doing_title.setLayout(new BorderLayout());
         in_done_title = new JPanel();
+        in_done_title.setLayout(new BorderLayout());
 
         in_todo_title.setLayout(new FlowLayout(FlowLayout.LEFT));
         in_doing_title.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -79,26 +87,20 @@ public class Mainpane implements ActionListener{
 
         in_todo_title.add(title_todo);
         in_todo_title.add(add_todo);
+        in_todo_title.setBorder(blackline);
         in_doing_title.add(title_doing);
         in_doing_title.add(add_doing);
+        in_doing_title.setBorder(blackline);
         in_done_title.add(title_done);
         in_done_title.add(add_done);
+        in_done_title.setBorder(blackline);
         
         todo = new JPanel();
-        todo.setLayout(new SpringLayout());
-        todo.setBounds(40, 60, 210, 350);
-        todo.setAlignmentY(Component.TOP_ALIGNMENT);
-        // todo.setBackground(Color.black);
-        doing = new JPanel();
-        doing.setLayout(new SpringLayout());
-        doing.setBounds(290, 60, 210, 350);
-        doing.setAlignmentY(Component.TOP_ALIGNMENT);
-        // doing.setBackground(Color.black);
+        todo.setLayout(new BoxLayout(todo, BoxLayout.Y_AXIS));
         done = new JPanel();
-        done.setLayout(new SpringLayout());
-        done.setBounds(540, 60, 210, 350);
-        done.setAlignmentY(Component.TOP_ALIGNMENT);
-        // done.setBackground(Color.black);
+        done.setLayout(new BoxLayout(done, BoxLayout.Y_AXIS));
+        doing = new JPanel();
+        doing.setLayout(new BoxLayout(doing, BoxLayout.Y_AXIS));
         
         in_todo.add(in_todo_title, BorderLayout.NORTH);
         in_todo.add(todo, BorderLayout.CENTER);
@@ -108,7 +110,7 @@ public class Mainpane implements ActionListener{
         
         in_done.add(in_done_title, BorderLayout.NORTH);
         in_done.add(done, BorderLayout.CENTER);
-        
+
         out_todo.add(in_todo);
         out_doing.add(in_doing);
         out_done.add(in_done);

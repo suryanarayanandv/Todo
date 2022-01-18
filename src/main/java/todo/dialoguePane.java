@@ -1,8 +1,9 @@
 package todo;
 
+import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
 import java.awt.Color;
-import java.sql.Date;
-import java.sql.Time;
+import java.awt.Dimension;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.management.timer.Timer;
@@ -20,15 +21,15 @@ public class dialoguePane {
     int year, month, dayofMonth, hour, minute;
     String Date, Time;
     Border blackline = BorderFactory.createLineBorder(Color.black);
-    JLabel newEvent = new JLabel();
+    JLabel newEvent = new JLabel("New Event");
+    JTextField eventName = new JTextField();
+    DatePicker datePicker = new DatePicker();
+    TimePicker timePicker = new TimePicker();
+
     public dialoguePane(JPanel panel) {
         newEvent.setBorder(blackline);
-        newEvent.setSize(210, 20);
         reference = panel;
-        JTextField eventName = new JTextField();
-        DatePicker datePicker = new DatePicker();
-        TimePicker timePicker = new TimePicker();
-        
+
         Object[] message = {
                 "Event:", eventName,
                 "Date:", datePicker,
@@ -36,7 +37,7 @@ public class dialoguePane {
         };
 
         int option = JOptionPane.showConfirmDialog(null, message, "ADD", JOptionPane.OK_CANCEL_OPTION);
-        if(option == JOptionPane.OK_OPTION) { // Need to add exceptional cases
+        if (option == JOptionPane.OK_OPTION) { // Need to add exceptional cases
             event = eventName.getText();
             date = datePicker.getDate();
             Date = "" + date.getDayOfMonth() + "/" + date.getMonthValue() + "/" + date.getYear();
@@ -49,10 +50,12 @@ public class dialoguePane {
             this.attachEvent();
         }
     }
-    public void attachEvent() {
-        newEvent.setText("<html>" + event + "<br/>" + Date + "      " + Time +"</html>");
-        reference.add(newEvent);
 
+    public void attachEvent() {
+        // set the label size 
+        newEvent.setPreferredSize(new Dimension(110, 30));
+        reference.add(newEvent);
+        newEvent.setText("<html>" + event + "<br/>" + Date + "      " + Time + "</html>");
         // refresh the panel
         reference.revalidate();
     }

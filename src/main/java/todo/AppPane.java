@@ -4,16 +4,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 
-
-/**
- * Hello world!
- */
 public final class AppPane implements MouseMotionListener {
 
     // Panels and frame
     JFrame mainFrame = new JFrame();
     int mouseX = 0, mouseY = 0;
-    private AppPane() {
+    public AppPane() {
         mainFrame.setLayout(new BorderLayout());
         ImageIcon icon = new ImageIcon("src/main/resources/icon.png");
         mainFrame.setIconImage(icon.getImage());
@@ -41,7 +37,12 @@ public final class AppPane implements MouseMotionListener {
                 | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        new AppPane();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AppPane();
+            }
+        });
     }
 
     @Override

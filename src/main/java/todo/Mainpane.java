@@ -16,9 +16,7 @@ public class Mainpane implements ActionListener{
     JPanel outer, doing, out_todo, out_doing, out_done, in_todo, in_doing, in_done, in_todo_title, in_doing_title, in_done_title, todo, done;
     JButton add_todo, add_doing, add_done;
     JLabel title_todo, title_doing, title_done;
-    GridBagConstraints gbc;
     public Mainpane(JFrame frame) {
-        gbc = new GridBagConstraints();
 
         /**
          * Proper Layout and Look

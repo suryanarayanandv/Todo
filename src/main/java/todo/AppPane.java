@@ -32,7 +32,7 @@ public final class AppPane implements MouseMotionListener {
      */
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
                 | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
@@ -43,6 +43,10 @@ public final class AppPane implements MouseMotionListener {
                 new AppPane();
             }
         });
+        // UIManager.LookAndFeelInfo[] looks = UIManager.getInstalledLookAndFeels();
+        // for (UIManager.LookAndFeelInfo look : looks) {
+        //     System.out.println(look.getClassName());
+        // }
     }
 
     @Override

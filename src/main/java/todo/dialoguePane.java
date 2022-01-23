@@ -1,7 +1,5 @@
 package todo;
 
-import java.awt.GridBagConstraints;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.time.LocalDate;
@@ -58,5 +56,11 @@ public class dialoguePane {
         newEvent.setText("<html>" + event + "<br/>" + Date + "      " + Time + "</html>");
         // refresh the panel
         reference.revalidate();
+
+        /**
+         *  Creating the Timer for the event
+         */
+
+        new timer(date, time, event);
     }
 }
